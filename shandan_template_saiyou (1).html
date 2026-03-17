@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商談テンプレート｜採用管理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #17171e;
+    --surface2: #1e1e28;
+    --border: #2a2a38;
+    --accent: #6ee7b7;
+    --accent2: #818cf8;
+    --text: #e8e8f0;
+    --text-muted: #6b6b80;
+    --danger: #f87171;
+    --gold: #fbbf24;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  header { margin-bottom: 40px; }
+
+  .label-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  h1 span { color: var(--accent2); }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .section:hover { border-color: var(--accent2); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(110,231,183,0.1);
+    border: 1px solid rgba(110,231,183,0.3);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .section-num.apo {
+    color: var(--accent2);
+    background: rgba(129,140,248,0.1);
+    border-color: rgba(129,140,248,0.3);
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .section.section-free { border-color: rgba(129,140,248,0.3); }
+  .section.section-free .section-num {
+    color: var(--accent2);
+    background: rgba(129,140,248,0.1);
+    border-color: rgba(129,140,248,0.3);
+  }
+
+  /* ── FORM ELEMENTS ── */
+  .sub-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub-label:first-of-type { margin-top: 0; }
+
+  .badge-input {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    background: rgba(110,231,183,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(110,231,183,0.3);
+    padding: 1px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+  }
+  .badge-input.manual {
+    background: rgba(251,191,36,0.12);
+    color: var(--gold);
+    border-color: rgba(251,191,36,0.3);
+  }
+  .badge-input.dropdown {
+    background: rgba(129,140,248,0.12);
+    color: var(--accent2);
+    border-color: rgba(129,140,248,0.3);
+  }
+
+  input[type="text"], input[type="email"] {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    transition: border-color 0.2s;
+    margin-bottom: 0;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(251,191,36,0.07);
+  }
+  input::placeholder { color: var(--text-muted); }
+
+  select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b6b80' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    margin-bottom: 0;
+  }
+  select:focus {
+    outline: none;
+    border-color: var(--accent2);
+    box-shadow: 0 0 0 3px rgba(129,140,248,0.08);
+  }
+  select option { background: #1e1e28; }
+
+  textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    padding: 10px 14px;
+    resize: vertical;
+    min-height: 58px;
+    line-height: 1.7;
+    transition: border-color 0.2s;
+    margin-bottom: 0;
+  }
+  textarea:focus { outline: none; border-color: var(--accent2); }
+  textarea::placeholder { color: var(--text-muted); }
+
+  /* grid for side-by-side */
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .row2 .col { display: flex; flex-direction: column; gap: 0; }
+
+  /* ── PREVIEW ── */
+  .preview-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+
+  .preview-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 13px;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  /* ── BUTTONS ── */
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  button {
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+  .btn-sheet { background: var(--accent); color: #0a0a0f; }
+  .btn-slack { background: var(--accent2); color: #fff; }
+  .btn-reset {
+    grid-column: 1 / -1;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 10px;
+    letter-spacing: 0.08em;
+  }
+  .btn-reset:hover { border-color: var(--danger); color: var(--danger); }
+  button:hover { opacity: 0.85; transform: translateY(-1px); }
+  button:active { transform: translateY(0); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 10px 24px;
+    border-radius: 40px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 999;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── MULTI-SELECT ── */
+  .multi-select { display: flex; flex-direction: column; gap: 6px; }
+
+  .ms-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+  .ms-item:hover { border-color: var(--accent2); background: rgba(129,140,248,0.05); }
+  .ms-item.checked {
+    border-color: var(--accent2);
+    background: rgba(129,140,248,0.12);
+  }
+  .ms-check {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--text-muted);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    font-size: 10px;
+  }
+  .ms-item.checked .ms-check {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #fff;
+  }
+  .ms-label { font-size: 13px; color: var(--text); line-height: 1.4; }
+
+  @media (max-width: 560px) {
+    .row2 { grid-template-columns: 1fr; }
+    .actions { grid-template-columns: 1fr; }
+    .btn-reset { grid-column: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="label-tag">RECRUITMENT SALES TEMPLATE</div>
+    <h1>商談詳細 <span>テンプレート</span></h1>
+  </header>
+
+  <!-- ══ APO報告セクション ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num apo">APO</span>
+      <span class="section-title">【アポ共有用FMT】</span>
+    </div>
+
+    <div class="sub-label">会社名 <span class="badge-input manual">手入力</span></div>
+    <input type="text" id="r_company" placeholder="例：株式会社〇〇" oninput="update()">
+
+    <div class="sub-label">会社URL <span class="badge-input manual">手入力</span></div>
+    <input type="text" id="r_url" placeholder="例：https://www.company.co.jp" oninput="update()">
+
+    <div class="sub-label">担当者名 <span class="badge-input manual">手入力</span></div>
+    <input type="text" id="r_name" placeholder="例：山田 太郎 様" oninput="update()">
+
+    <div class="sub-label">TEL <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="r_tel_type" onchange="update()">
+      <option value="">── 種別を選択 ──</option>
+      <option value="直通">直通</option>
+      <option value="代表">代表</option>
+      <option value="携帯">携帯</option>
+      <option value="内線">内線</option>
+    </select>
+    <input type="text" id="r_tel" placeholder="例：03-XXXX-XXXX" oninput="update()" style="margin-top:6px;">
+
+    <div class="sub-label">メールアドレス <span class="badge-input manual">手入力</span></div>
+    <input type="text" id="r_email" placeholder="例：yamada@example.com" oninput="update()">
+
+    <div class="sub-label">商談実施予定日 <span class="badge-input dropdown">プルダウン</span></div>
+    <div class="row2">
+      <div class="col">
+        <select id="r_date_month" onchange="update()">
+          <option value="">月</option>
+          <option value="1月">1月</option><option value="2月">2月</option><option value="3月">3月</option>
+          <option value="4月">4月</option><option value="5月">5月</option><option value="6月">6月</option>
+          <option value="7月">7月</option><option value="8月">8月</option><option value="9月">9月</option>
+          <option value="10月">10月</option><option value="11月">11月</option><option value="12月">12月</option>
+        </select>
+      </div>
+      <div class="col">
+        <select id="r_date_day" onchange="update()">
+          <option value="">日</option>
+          <script>for(let i=1;i<=31;i++) document.write(`<option value="${i}日">${i}日</option>`);</script>
+        </select>
+      </div>
+    </div>
+    <div class="row2" style="margin-top:6px;">
+      <div class="col">
+        <select id="r_date_week" onchange="update()">
+          <option value="">曜日</option>
+          <option value="（月）">（月）</option><option value="（火）">（火）</option><option value="（水）">（水）</option>
+          <option value="（木）">（木）</option><option value="（金）">（金）</option>
+          <option value="（土）">（土）</option><option value="（日）">（日）</option>
+        </select>
+      </div>
+      <div class="col">
+        <select id="r_date_time" onchange="update()">
+          <option value="">時間帯</option>
+          <option value="9:00〜">9:00〜</option><option value="9:30〜">9:30〜</option>
+          <option value="10:00〜">10:00〜</option><option value="10:30〜">10:30〜</option>
+          <option value="11:00〜">11:00〜</option><option value="11:30〜">11:30〜</option>
+          <option value="13:00〜">13:00〜</option><option value="13:30〜">13:30〜</option>
+          <option value="14:00〜">14:00〜</option><option value="14:30〜">14:30〜</option>
+          <option value="15:00〜">15:00〜</option><option value="15:30〜">15:30〜</option>
+          <option value="16:00〜">16:00〜</option><option value="16:30〜">16:30〜</option>
+          <option value="17:00〜">17:00〜</option><option value="17:30〜">17:30〜</option>
+          <option value="18:00〜">18:00〜</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ヒアリング項目 ══ -->
+
+  <!-- 01. 採用手法 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">採用手法</span>
+    </div>
+    <div class="sub-label">主な採用手法 <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_method" onchange="update()">
+      <option value="">── 選択してください ──</option>
+      <option>求人広告（Indeed / doda / リクナビNEXT等）</option>
+      <option>人材紹介（エージェント）</option>
+      <option>自社採用サイト・リファラル</option>
+      <option>新卒採用（マイナビ / リクナビ等）</option>
+      <option>ダイレクトリクルーティング（ビズリーチ等）</option>
+      <option>SNS採用（Wantedly等）</option>
+      <option>複数チャネル併用</option>
+      <option>その他</option>
+    </select>
+    <textarea id="h_method_note" placeholder="補足があれば記入..." oninput="update()"></textarea>
+  </div>
+
+  <!-- 02. ATS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">現在利用中のATS</span>
+    </div>
+    <div class="sub-label">ATS（中途） <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_ats_chuto" onchange="update()">
+      <option value="">── 選択してください ──</option>
+      <optgroup label="── 主要ATS">
+        <option>HRMOS（ハーモス）</option>
+        <option>HERP Hire</option>
+        <option>sonar ATS</option>
+        <option>Talentio</option>
+        <option>採用一括かんりくん</option>
+        <option>ジョブカン採用管理</option>
+        <option>マイナビAOL</option>
+        <option>mochica</option>
+        <option>ENGAGE（エン・ジャパン）</option>
+        <option>採用ドクター</option>
+        <option>RPM</option>
+        <option>Workday</option>
+        <option>SmartHR（採用機能）</option>
+      </optgroup>
+      <option>Excel / スプレッドシート（自社管理）</option>
+      <option>利用なし</option>
+      <option>不明</option>
+      <option>その他</option>
+    </select>
+
+    <div class="sub-label" style="margin-top:10px;">ATS（新卒） <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_ats_shinsotsu" onchange="update()">
+      <option value="">── 選択してください ──</option>
+      <optgroup label="── 主要ATS（新卒）">
+        <option>マイナビAOL</option>
+        <option>リクナビ HR Connect</option>
+        <option>採用一括かんりくん</option>
+        <option>ジョブカン採用管理</option>
+        <option>HRMOS（ハーモス）</option>
+        <option>sonar ATS</option>
+        <option>i-web</option>
+        <option>OFFERBOX管理</option>
+      </optgroup>
+      <option>Excel / スプレッドシート（自社管理）</option>
+      <option>利用なし</option>
+      <option>不明</option>
+      <option>その他</option>
+    </select>
+    <textarea id="h_ats_note" placeholder="補足（切り替え予定・課題感など）..." oninput="update()"></textarea>
+  </div>
+
+  <!-- 03. 応募数 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">応募数</span>
+    </div>
+    <div class="row2">
+      <div class="col">
+        <div class="sub-label">応募数（新卒）<span class="badge-input manual">手入力</span></div>
+        <input type="text" id="h_obo_shin" placeholder="例：年 500名" oninput="update()">
+      </div>
+      <div class="col">
+        <div class="sub-label">応募数（中途）<span class="badge-input manual">手入力</span></div>
+        <input type="text" id="h_obo_chuto" placeholder="例：月 80名" oninput="update()">
+      </div>
+    </div>
+    <div class="sub-label" style="margin-top:10px;">規模感 <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_obo_scale" onchange="update()">
+      <option value="">── 月の応募規模を選択 ──</option>
+      <option>〜10名/月（少規模）</option>
+      <option>11〜30名/月（中規模）</option>
+      <option>31〜100名/月（中〜大規模）</option>
+      <option>101〜300名/月（大規模）</option>
+      <option>300名以上/月（超大規模）</option>
+      <option>不明</option>
+    </select>
+  </div>
+
+  <!-- 04. 採用実績 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">採用実績・採用数目標</span>
+    </div>
+    <div class="row2">
+      <div class="col">
+        <div class="sub-label">採用数（新卒）<span class="badge-input manual">手入力</span></div>
+        <input type="text" id="h_saiyo_shin" placeholder="例：目標 20名/年" oninput="update()">
+      </div>
+      <div class="col">
+        <div class="sub-label">採用数（中途）<span class="badge-input manual">手入力</span></div>
+        <input type="text" id="h_saiyo_chuto" placeholder="例：目標 5名/月" oninput="update()">
+      </div>
+    </div>
+    <div class="sub-label" style="margin-top:10px;">採用達成状況 <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_saiyo_status" onchange="update()">
+      <option value="">── 選択してください ──</option>
+      <option>目標達成（充足）</option>
+      <option>目標の80%達成</option>
+      <option>目標の50%程度</option>
+      <option>目標未達・苦戦中</option>
+      <option>採用計画なし（欠員補充のみ）</option>
+      <option>不明</option>
+    </select>
+  </div>
+
+  <!-- 05. 採用チャネル -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">採用チャネル</span>
+    </div>
+    <div class="sub-label">採用チャネル（新卒） <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_ch_shin" onchange="update()">
+      <option value="">── 選択してください ──</option>
+      <option>マイナビ</option>
+      <option>リクナビ</option>
+      <option>マイナビ＋リクナビ（両方）</option>
+      <option>キャリタス就活</option>
+      <option>OfferBox（ダイレクト）</option>
+      <option>学内説明会・OB訪問</option>
+      <option>インターンシップ経由</option>
+      <option>自社採用サイトのみ</option>
+      <option>その他</option>
+    </select>
+
+    <div class="sub-label" style="margin-top:10px;">採用チャネル（中途） <span class="badge-input dropdown">プルダウン</span></div>
+    <select id="h_ch_chuto" onchange="update()">
+      <option value="">── 選択してください ──</option>
+      <option>人材紹介（エージェント）</option>
+      <option>Indeed</option>
+      <option>doda</option>
+      <option>リクルートエージェント</option>
+      <option>ビズリーチ</option>
+      <option>LinkedIn</option>
+      <option>Wantedly</option>
+      <option>エン転職</option>
+      <option>自社サイト・リファラル</option>
+      <option>複数媒体併用</option>
+      <option>その他</option>
+    </select>
+    <textarea id="h_ch_note" placeholder="利用中の媒体名・詳細など..." oninput="update()"></textarea>
+  </div>
+
+  <!-- 06. 現状の課題 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">採用における現状の課題</span>
+    </div>
+    <div class="sub-label">複数選択可 <span class="badge-input dropdown">プルダウン</span></div>
+    <div class="multi-select" id="ms_issue">
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">応募数が少ない・母集団形成が難しい</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">応募は来るが書類選考の工数が多い</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">複数媒体の管理が煩雑（転記・集約作業）</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">面接歩留まりが低い（辞退・ドタキャンが多い）</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">内定承諾率が低い</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">入社後の早期離職が多い</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">採用担当の人手不足</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">ATSの分析・可視化機能が不足</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">現行ATSへの不満（使いにくい・機能不足）</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">特になし（現状満足）</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_issue')"><div class="ms-check"></div><span class="ms-label">その他</span></div>
+    </div>
+    <textarea id="h_issue_note" placeholder="詳細や補足を記入..." oninput="update()" style="margin-top:8px;"></textarea>
+  </div>
+
+  <!-- 07. 商談時に聞きたいこと -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">商談時に聞きたいこと（打合せ内容）</span>
+    </div>
+    <div class="sub-label">複数選択可 <span class="badge-input dropdown">プルダウン</span></div>
+    <div class="multi-select" id="ms_agenda">
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">現在の採用フローと工数の確認</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">ATSの切り替え・リプレイス検討状況</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">導入スケジュール・予算感の確認</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">競合他社・他製品との比較検討状況</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">決裁者・意思決定プロセスの確認</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">デモ・トライアルの提案</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">PERSONAのAI書類選考機能の説明</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">600媒体連携機能の説明</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">料金・費用対効果の確認</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">他社導入事例の共有</span></div>
+      <div class="ms-item" onclick="toggleMs(this,'ms_agenda')"><div class="ms-check"></div><span class="ms-label">その他</span></div>
+    </div>
+    <textarea id="h_agenda_note" placeholder="具体的に聞きたいことを記入..." oninput="update()" style="margin-top:8px;"></textarea>
+  </div>
+
+  <!-- 08. 備考 -->
+  <div class="section section-free">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <span class="section-title">備考・自由記入欄</span>
+    </div>
+    <textarea id="free_note" placeholder="商談メモ、特記事項、次回アクションなど自由に記入してください..." oninput="update()" style="min-height:100px;"></textarea>
+  </div>
+
+  <!-- プレビュー -->
+  <div class="preview-label">▸ PREVIEW</div>
+  <div class="preview-box" id="preview">選択するとここにプレビューが表示されます</div>
+
+  <!-- ボタン -->
+  <div class="actions">
+    <button class="btn-sheet" onclick="copySheet()">📋 スプシ用コピー（タブ区切り）</button>
+    <button class="btn-slack" onclick="copySlack()">💬 Slack用コピー</button>
+    <button class="btn-reset" onclick="resetAll()">↺ リセット（全項目クリア）</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function getVal(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function toggleMs(item, groupId) {
+    item.classList.toggle('checked');
+    const chk = item.querySelector('.ms-check');
+    chk.textContent = item.classList.contains('checked') ? '✓' : '';
+    update();
+  }
+
+  function getMultiVal(groupId) {
+    const items = document.querySelectorAll(`#${groupId} .ms-item.checked .ms-label`);
+    return Array.from(items).map(el => el.textContent).join('、') || '';
+  }
+
+  function buildReport() {
+    const company  = getVal('r_company') || '　';
+    const url      = getVal('r_url') || '　';
+    const name     = getVal('r_name') || '　';
+    const telType  = getVal('r_tel_type');
+    const telNum   = getVal('r_tel');
+    const tel      = [telType, telNum].filter(Boolean).join('　') || '　';
+    const email    = getVal('r_email') || '　';
+    const month    = getVal('r_date_month');
+    const day      = getVal('r_date_day');
+    const week     = getVal('r_date_week');
+    const time     = getVal('r_date_time');
+    const date     = [month, day, week, time].filter(Boolean).join('') || '　';
+
+    return [
+      '【アポ共有用FMT】',
+      `会社名：${company}`,
+      `会社URL：${url}`,
+      `担当者名：${name}`,
+      `TEL：${tel}`,
+      `mail：${email}`,
+      `商談実施予定日：${date}`,
+    ].join('\n');
+  }
+
+  const hearingFields = [
+    { label: '採用手法',              ids: ['h_method'],        note: 'h_method_note' },
+    { label: '現在利用中のATS（中途）', ids: ['h_ats_chuto'],     note: 'h_ats_note' },
+    { label: '現在利用中のATS（新卒）', ids: ['h_ats_shinsotsu'], note: null },
+    { label: '応募数（新卒）',          ids: ['h_obo_shin'],      note: null },
+    { label: '応募数（中途）',          ids: ['h_obo_chuto'],     note: null },
+    { label: '応募規模感',             ids: ['h_obo_scale'],     note: null },
+    { label: '採用数（新卒）目標',       ids: ['h_saiyo_shin'],    note: null },
+    { label: '採用数（中途）目標',       ids: ['h_saiyo_chuto'],   note: null },
+    { label: '採用達成状況',            ids: ['h_saiyo_status'],  note: null },
+    { label: '採用チャネル（新卒）',     ids: ['h_ch_shin'],       note: 'h_ch_note' },
+    { label: '採用チャネル（中途）',     ids: ['h_ch_chuto'],      note: null },
+    { label: '現状の課題',              multi: 'ms_issue',        note: 'h_issue_note' },
+    { label: '商談時に聞きたいこと',     multi: 'ms_agenda',       note: 'h_agenda_note' },
+    { label: '備考・自由記入',          ids: [],                  note: 'free_note' },
+  ];
+
+  function buildHearing() {
+    return hearingFields.map(f => {
+      let selected = '';
+      if (f.multi) {
+        selected = getMultiVal(f.multi);
+      } else {
+        selected = (f.ids || []).map(id => getVal(id)).filter(Boolean).join('　');
+      }
+      const note = f.note ? getVal(f.note) : '';
+      let value = selected || '';
+      if (note) value += (value ? '\n' : '') + note;
+      if (!value) value = '（未入力）';
+      return { label: f.label, value };
+    });
+  }
+
+  function update() {
+    const report  = buildReport();
+    const hearing = buildHearing();
+    const details = hearing.map(d => `【${d.label}】\n${d.value}`).join('\n\n');
+    document.getElementById('preview').textContent =
+      report + '\n\n─────────────────\n【ヒアリング項目】\n\n' + details;
+  }
+
+  function copySheet() {
+    const hearing = buildHearing();
+    const headers = hearing.map(d => d.label).join('\t');
+    const values  = hearing.map(d => d.value.replace(/\n/g, ' ')).join('\t');
+    navigator.clipboard.writeText(headers + '\n' + values)
+      .then(() => showToast('スプシ用にコピーしました！'));
+  }
+
+  function copySlack() {
+    const report  = buildReport();
+    const hearing = buildHearing();
+    const lines   = [report, '', '*─────────────────*', '*【ヒアリング項目】*', ''];
+    hearing.forEach(d => {
+      lines.push(`*【${d.label}】*`);
+      lines.push(d.value);
+      lines.push('');
+    });
+    navigator.clipboard.writeText(lines.join('\n'))
+      .then(() => showToast('Slack用にコピーしました！'));
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  function resetAll() {
+    document.querySelectorAll('input, textarea, select').forEach(el => {
+      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      else el.value = '';
+    });
+    document.querySelectorAll('.ms-item.checked').forEach(item => {
+      item.classList.remove('checked');
+      item.querySelector('.ms-check').textContent = '';
+    });
+    document.getElementById('preview').textContent = '選択するとここにプレビューが表示されます';
+    showToast('リセットしました');
+  }
+</script>
+</body>
+</html>
